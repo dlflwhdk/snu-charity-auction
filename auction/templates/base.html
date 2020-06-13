@@ -25,7 +25,12 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/">SNU자선경매</a>
+      <a class="navbar-brand" style="margin-right: 200px;" href="/">SNU자선경매</a>
+      {% if request.user.is_admin %}
+        <a class="navbar-brand" style="margin-right: 30px;" href="/">물품보기</a>
+        <a class="navbar-brand" style="margin-right: 30px;" href="/admin/auction/">경매관리</a>
+        <a class="navbar-brand" style="margin-right: 30px;" href="/">사용자관리</a>
+      {% endif %}
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

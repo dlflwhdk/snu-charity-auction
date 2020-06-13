@@ -27,14 +27,13 @@ class Auction(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
     contents = models.TextField(null=False, blank=True)
     # images
-    state = models.CharField(max_length=20, null=False, blank=False)
+    state = models.CharField(max_length=20, null=False, blank=False)  # 준비, 취소, 진행중, 완료, 낙찰
     start_datetime = models.DateTimeField(null=False, blank=False)
     end_datetime = models.DateTimeField(null=False, blank=False)
     min_bid = models.IntegerField(null=False)
-    now_bid = models.IntegerField(default=None, null=True)
     max_bid = models.IntegerField(null=False)
     participants_count = models.IntegerField(default=0, null=False)
-    winning_bid = models.IntegerField(null=True)
+    winning_bid = models.IntegerField(null=True)  # now_bid랑 동일한 역할로 이거 쓸게요. 경매 진행중일 때는 현재 입찰가, 경매 끝나고 나서는 낙찰가로 사용.
     winning_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='won_auction_set', null=True)
     created_datetime = models.DateTimeField(default=datetime.now, null=False, blank=False)
     updated_datetime = models.DateTimeField(default=datetime.now, null=False, blank=False)

@@ -113,3 +113,9 @@ def auction_detail_view(request, auction_id):
     context = {'auction': auction, 'formatted_start_datetime': formatted_start_datetime,
                'formatted_end_datetime': formatted_end_datetime}
     return render(request, 'auction-detail.html', context)
+
+
+def auction_admin_view(request):
+    auctions = Auction.objects.all()
+    context = {'auctions': auctions}
+    return render(request, 'auction-admin.html', context)
