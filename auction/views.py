@@ -8,11 +8,20 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.urls import reverse_lazy
-from django.utils import dateformat
+from django.utils import dateformat, timezone
 
 
 def index(request):
     auctions = Auction.objects.all()
+    for auction in auctions:
+        if timezone.now() >= auction.start_datetime and auction.state == '준비':
+            auction.state = '진행중'
+            auction.save()
+    # auction_type = request.GET.get('auction_type')
+    # start_date = request.GET.get('start_date')
+    # end_date = request.GET.get('end_date')
+    # price = request.GET.get('price')
+    # keyword = request.GET.get('keyword')
     context = {'auctions': auctions}
     return render(request, 'index.html', context=context)
 
@@ -108,6 +117,9 @@ def modify_auction(request):
 
 def auction_detail_view(request, auction_id):
     auction = Auction.objects.get(id=auction_id)
+    if timezone.now() >= auction.start_datetime and auction.state == '준비':
+        auction.state = '진행중'
+        auction.save()
     formatted_start_datetime = dateformat.format(auction.start_datetime, 'Y-m-d H:i:s')
     formatted_end_datetime = dateformat.format(auction.end_datetime, 'Y-m-d H:i:s')
     context = {'auction': auction, 'formatted_start_datetime': formatted_start_datetime,
@@ -119,3 +131,15 @@ def auction_admin_view(request):
     auctions = Auction.objects.all()
     context = {'auctions': auctions}
     return render(request, 'auction-admin.html', context)
+
+
+def update_auction_state(request, auction_id, state):
+    auction = Auction.objects.get(id=auction_id)
+    if state == 3:
+        auction.state = '완료'
+    elif state == 4:
+        auction.state = '낙찰'
+    elif state == 5:
+        auction.state = '취소'
+    auction.save()
+    return HttpResponseRedirect('/admin/auction/')

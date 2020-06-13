@@ -27,7 +27,7 @@ class Auction(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
     contents = models.TextField(null=False, blank=True)
     # images
-    state = models.CharField(max_length=20, null=False, blank=False)  # 준비, 취소, 진행중, 완료, 낙찰
+    state = models.CharField(max_length=20, null=False, blank=False)  # 준비, 진행중, 완료, 낙찰, 취소
     start_datetime = models.DateTimeField(null=False, blank=False)
     end_datetime = models.DateTimeField(null=False, blank=False)
     min_bid = models.IntegerField(null=False)

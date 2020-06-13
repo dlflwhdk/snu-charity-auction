@@ -18,8 +18,8 @@ urlpatterns = [
     path('auction/detail/<int:auction_id>/', login_required(views.auction_detail_view)),
 
     path('admin/auction/', login_required(views.auction_admin_view)),
+    path('admin/auction/update-state/<int:auction_id>/<state>', login_required(views.update_auction_state)),
 
     path('api/auction/create/', views.create_auction),
     path('api/auction/modify/', views.modify_auction),
-
 ]
