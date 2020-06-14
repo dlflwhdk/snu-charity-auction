@@ -2,68 +2,65 @@
 {% load static %}
 {% block content %}
 
-  <div class="container p-3">
-    <h1 class="text-center md-10 mb-5 font-weight-bold">물품 상세 정보</h1>
-    <div class="row">
-      <div class="col-md-4">
-        <img class="img-thumbnail mb-4" src="{% static 'img/item1.jpg' %}" alt="">
-      </div>
-      <div class="col-md-8">
-        <div class="container">
-          <h2 class="text-center md-10 mb-4 font-weight-bold">{{ auction.name }}</h2>
-          <div class="card card-lg mb-3">
-            <div class="card-body">
-              <h3 class="card-title text-center font-weight-bold">기본 정보</h3>
-              <h4 class="card-text text-left jb-large">
-                <br/>
-                <div class="row">
-                  <div class="col-md-6">
-                    시작가: {{ auction.min_bid }}원
-                  </div>
-                  <div class="col-md-6">
-                    현재가: {{ auction.now_bid }}원
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    최고가: {{ auction.max_bid }}원
-                  </div>
-                  <div class="col-md-6">
-                    입찰: {{ auction.participants_count }}명
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    시작: {{ formatted_start_datetime }}
-                  </div>
-                  <div class="col-md-6">
-                    종료: {{ formatted_end_datetime }}
-                  </div>
-                </div>
-              </h4>
-            </div>
+<section>
+  <h2 class="text-center md-10 mb-5 font-weight-bold">물품 상세 정보</h2>
+  <div class="container">
+    <div class="product-details"></div>
+      <div class="row">
+      <!--product-details-->
+        <div class="col-sm-5">
+          <div class="view-product">
+            <img class="img-thumbnail mb-4" src="{% static 'img/item1.jpg' %}" alt="">
           </div>
-          <div class="card card-lg">
-            <div class="card-body">
-              <h3 class="card-title text-center font-weight-bold">상세 정보</h3>
-              <h4 class="card-text text-left jb-large">
-                <br/>
-                {{ auction.contents }}
-              </h4>
+          <div class="view-other-image">
+            <div class="row">
+              <div class="p-2">
+                <div class="column">
+                  <img class="img-responsive img-thumbnail float-left" src="{% static 'img/item1.jpg' %}" alt="">
+                </div>
+                <div class="column">
+                  <img class="img-responsive img-thumbnail float-left" src="{% static 'img/item1.jpg' %}" alt="">
+                </div>
+                <div class="column">
+                  <img class="img-responsive img-thumbnail float-left" src="{% static 'img/item1.jpg' %}" alt="">
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="p-2">
-          <img class="img-responsive img-thumbnail mb-4 float-left" src="{% static 'img/item1.jpg' %}" alt=""
-               width="200">
+        <div class="col-sm-7" style="border: 5px double #c5c3c3;" >
+          <div class="product-information">
+            <!--/product-information-->
+            <h2 class="text-center md-10 font-weight-bold" style="margin-top: 20px;">{{ auction.name }}</h2>
+            &nbsp;
+            <p><b>시작가:</b> {{ auction.min_bid }}원</p>
+            <p><b>현재가:</b> {{ auction.now_bid }}원</p>
+            <p><b>최고가:</b> {{ auction.max_bid }}원</p>
+            <p><b>입찰:</b> {{ auction.participants_count }}명</p>
+            <p><b>시작:</b> {{ formatted_start_datetime }}</p>
+            <p><b>종료:</b> {{ formatted_end_datetime }}</p>
+            &nbsp;
+            <hr style="border: solid 1px #c5c3c3; width: 100%;">
+            <h2 class="text-center md-10 font-weight-bold">상세 정보</h3>
+            &nbsp;
+            {{ auction.contents }}
+            <p><b>Condition:</b> New</p>
+            <p><b>Brand:</b> E-SHOPPER</p>
+            <p><b>Condition:</b> New</p>
+            <p><b>Brand:</b> E-SHOPPER</p>
+            <p><b>Condition:</b> New</p>
+            <p><b>Brand:</b> E-SHOPPER</p>
+            &nbsp;
+            <div class="submit">
+              <button class="btn btn-primary btn-lg mb-4 pull-right btn-block" style="width:max-content;">입찰</button>
+            </div>
+          </div>
+          <!--/product-information-->
         </div>
+        <!--/product-details-->
       </div>
     </div>
-    <button class="btn btn-primary btn-lg mb-4 pull-right btn-block">입찰</button>
   </div>
+</section>
 
 {% endblock %}
